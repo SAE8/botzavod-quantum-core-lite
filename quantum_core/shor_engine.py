@@ -1,15 +1,15 @@
 """
-shor_engine.py — Lite demo-движок Алгоритма Шора для BotZaVOD Quantum Core.
+shor_engine.py — Lite public demo of Shor's Algorithm engine for BotZaVOD Quantum Core.
 
-Это НЕ настоящий квантовый алгоритм, а безопасная публичная версия:
-- использует обычный Python (классическое факторизование);
-- показывает структуру "движка" (инициализация, запуск, лог);
-- в боевой версии внутренняя логика будет заменена на реальный core.
+This is NOT a real quantum implementation — only a safe classical demo:
+- classical integer factorization;
+- clean engine structure (init, run, metadata);
+- serves as a placeholder for the private quantum backend.
 """
 
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Dict, List
+from typing import List, Dict
 
 
 @dataclass
@@ -21,19 +21,19 @@ class ShorResult:
 
 
 class ShorEngine:
-    """Lite Shor-engine: классический факторизатор для публичного репо."""
+    """Lite Shor Engine — classical factorization for public repository."""
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.name = "ShorEngineLite"
         self.version = "0.1.0"
         self.backend = "classical"
 
     def factor(self, n: int) -> ShorResult:
-        """Очень простой перебор делителей, только для демо."""
+        """Very simple divisor search — demo only."""
         if n <= 1:
             return ShorResult(number=n, factors=[n], steps=0)
 
-        factors: List[int] = []
+        factors = []
         d = 2
         steps = 0
         tmp = n
@@ -51,7 +51,6 @@ class ShorEngine:
         return ShorResult(number=n, factors=factors, steps=steps)
 
     def info(self) -> Dict[str, str]:
-        """Метаданные движка — удобно показывать в README/логах."""
         return {
             "engine": self.name,
             "version": self.version,
@@ -61,14 +60,7 @@ class ShorEngine:
 
 
 def run_shor_demo(n: int = 21) -> ShorResult:
-    """
-    Удобная обёртка: один вызов для тестов и примеров.
-
-    Пример:
-        from quantum_core import shor_engine
-        result = shor_engine.run_shor_demo(33)
-        print(result.factors)
-    """
+    """Convenience wrapper for quick testing."""
     engine = ShorEngine()
     return engine.factor(n)
-  
+    
