@@ -1,12 +1,10 @@
 """
-grover_engine.py — Lite demo-движок Алгоритма Гровера для BotZaVOD Quantum Core.
-
-Задача: показать структуру поискового движка без реального квантового backend'а.
+grover_engine.py — Lite demo engine of Grover's Algorithm for BotZaVOD Quantum Core.
 """
 
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Any, List, Dict, Callable
+from typing import Any, Callable, Dict, List
 import random
 
 
@@ -20,9 +18,9 @@ class GroverResult:
 
 
 class GroverEngine:
-    """Lite Grover-engine: имитация поиска по пространству состояний."""
+    """Lite Grover Engine — classical randomized search simulation."""
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.name = "GroverEngineLite"
         self.version = "0.1.0"
         self.backend = "classical"
@@ -33,12 +31,7 @@ class GroverEngine:
         oracle: Callable[[Any], bool],
         max_attempts: int = 64,
     ) -> GroverResult:
-        """
-        Имитируем «квантовый» поиск случайными попытками.
 
-        space  — список элементов
-        oracle — функция, которая говорит, является ли элемент целью
-        """
         indices = list(range(len(space)))
         random.shuffle(indices)
 
@@ -70,13 +63,12 @@ class GroverEngine:
 
 
 def run_grover_demo() -> GroverResult:
-    """Пример: ищем число 42 в массиве случайных чисел."""
-    space = [random.randint(0, 100) for _ in range(64)]
+    random_space = [random.randint(0, 100) for _ in range(64)]
     target = 42
 
-    def oracle(x: int) -> bool:
+    def oracle(x):
         return x == target
 
     engine = GroverEngine()
-    return engine.search(space, oracle)
-  
+    return engine.search(random_space, oracle)
+    
